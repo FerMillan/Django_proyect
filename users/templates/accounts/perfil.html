@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>TU PERFIL</h1>
+
+<div class="card text-center">
+  <!-- {% if e %}
+  <div class="alert alert-warning" role="alert">
+    <h1 class="display-4 font-weight-bold">{{ e }}</h1>
+  </div>
+  {% endif %} -->
+
+  
+  
+  <ul class="list-group list-group-flush">
+    {% for datos in data %}
+      {% if request.user.id == datos.id %}
+        <li class="list-group-item"><span class="font-weight-bold perfil-item">Nombre de usuario:</span> {{datos.usuario}}</li>
+        <li class="list-group-item"><span class="font-weight-bold perfil-item">Nombre:</span> {{datos.nombre_1}}</li>
+        {% if not datos.nombre_2  %}
+          <li class="list-group-item"><span class="font-weight-bold perfil-item">Apellido paterno: </span>{{datos.apellido_p}}</li>
+          <li class="list-group-item"><span class="font-weight-bold perfil-item">Apellido materno: </span>{{datos.apellido_m}}</li>
+          <li class="list-group-item"><span class="font-weight-bold perfil-item">Correo electrónico: </span>{{datos.correo}}</li>
+          <li class="list-group-item"><span class="font-weight-bold perfil-item">Dependencia: </span>{{datos.dependencia_origen.nombre}}</li>
+        {% else %}
+          <li class="list-group-item"><span class="font-weight-bold perfil-item">Segundo nombre: </span>{{datos.nombre_2}}</li>
+          <li class="list-group-item"><span class="font-weight-bold perfil-item">Apellido paterno: </span>{{datos.apellido_p}}</li>
+          <li class="list-group-item"><span class="font-weight-bold perfil-item">Apellido materno: </span> {{datos.apellido_m}}</li>
+          <li class="list-group-item"><span class="font-weight-bold perfil-item">Correo electrónico: </span>{{datos.correo}}</li>
+          <li class="list-group-item"><span class="font-weight-bold perfil-item">Dependencia: </span>{{datos.dependencia_origen.nombre}}</li>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    
+    <form action="{% url 'usuario:editar' request.user.id %}" method='POST'>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-warning btn-lg" data-toggle="tooltip" data-placement="top" title="Editar">
+            EDITAR
+        </button>
+    </form> 
+    {% comment %} {% url 'perfil:editar' request.user.id %} {% endcomment %}
+  </ul>
+</div>
+
+{% endblock content %}

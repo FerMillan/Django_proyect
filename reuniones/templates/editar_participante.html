@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Editar Participante</h1>
+
+    <div class="form form-group d-flex justify-content-center">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+                <p> {{ form.nombre.label }}: {{form.nombre}} </p>
+                <p> {{ form.apellido_p.label }}: {{form.apellido_p}} </p>
+                <p> {{ form.apellido_m.label }}: {{form.apellido_m}} </p>
+                <p> {{ form.instituto.label }}: {{form.instituto}} </p>
+                <p> {{ form.email.label }}: {{form.email}} </p>
+
+                <input class="d-flex justify-content-center btn btn-primary btn-lg" style="margin: auto;" type="submit" value="Guargar">
+                <br>
+                <div class="d-flex justify-content-center">
+                    <a href="{% url 'reuniones:participantes' reunion.folio  %}" >  
+                        <button type="button" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Cancelar"  style="margin: auto;">
+                            Cancelar
+                        </button>
+                    </a>
+                </div>
+        </form>
+    </div>
+
+{% endblock content %}

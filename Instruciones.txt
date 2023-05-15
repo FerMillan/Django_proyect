@@ -1,0 +1,17 @@
+### Pasos
+
+1. Crear una nueva base de datos, o borrar la actual
+1. Borrar las carpetas 'migration' de cada app del proyecto
+1. Hacer makemigrations y migrate, hasta que diga 'No hay cambios detectados'
+1. Si da 2 opciones seleccionar la '1)', y despues poner el número 0 y dar enter
+1. Entrar al entorno de postgre con el comando 'psql'
+1. Acceder a la base con el comando
+    * \c 'nombre_de_la_base_de_datos'
+1. Una vez dentro hacer el siguiente query
+
+    * INSERT INTO oficios_dependencia(id_dependencia,nombre,siglas)
+    VALUES (0,'Ninguna','N/A');
+
+    SELECT * FROM oficios_dependencia;
+
+1. Salir del entrono con '\q'

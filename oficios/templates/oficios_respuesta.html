@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+
+<h1>Aquí puedes ver las respuestas a los registros</h1>
+
+<table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Número de registro original</th>
+                <th>Fecha de creación</th>
+                <th>Usuario</th>
+                <th>Asunto</th>
+                <th>Documento</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for oficio_respuesta in data_r %}
+                    <tr>
+                        <th>{{forloop.counter}}</th>
+                        <td>{{oficio_respuesta.id_oficio}}</td>
+                        {% language 'es' %}
+                        <td>{{oficio_respuesta.fecha|date:"Y-m-d"}}</td>
+                        {% endlanguage %}
+                        <td>{{oficio_respuesta.id_usuario.usuario}}</td>
+                        <td>{{oficio_respuesta.asunto}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-lg" title="Descargar">
+                                <a href="{{oficio_respuesta.documento.url}}" download>
+                                    <i class="fas fa-file-download"></i>
+                                </a>
+                            </button>
+                        </td>
+                    </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% include "pagination.html" with page_obj=oficios_page num_p=num_pages %}
+
+{% endblock content %}

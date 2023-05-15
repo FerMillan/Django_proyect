@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Lista de Participantes</h1>
+
+    {% if not participantes %}
+        <br>
+        <br>
+        <h2>No hay participantes para esta reunion</h2>
+        <br>
+        <br>
+        <h3>
+            <a class="btn btn-primary btn-lg" href="{% url 'reuniones:agregar_participantes' reunion.folio %}">Agregar Participante</a>
+        </h3>
+    {% else %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Instituto</th>
+                <th>Correo Electrónico</th>
+                <!-- <th>Documento</th> -->
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for part in participantes %}
+            <tr>
+                {% if part.reunion.folio == reunion.folio %}
+                <!-- {{ part.reunion.folio }} -->
+                <th> </th>
+                
+                    <td>{{part.nombre}}</td>
+                    <td>{{part.apellido_p}}</td>
+                    <td>{{part.apellido_m}}</td>
+                    <td>{{part.instituto}}</td>
+                    <td>{{part.email}}</td>
+
+                    <!-- {% if part.reunion == documentos.documento.id %}
+                        <td>{{ documentos.documento }}aa</td>
+                    {% endif %} -->
+                
+                
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <form action="/reuniones/editar/participantes/{{reunion.folio}}/{{part.id}}" method='POST' style="padding-right: 5%;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-warning btn-lg" data-toggle="tooltip" data-placement="top" title="Editar">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </form>
+                        <form action="/reuniones/borrar/participantes/{{reunion.folio}}/{{part.id}}" method='POST' onsubmit="return confirm('¿Estas seguro que quieres borrar este Participante?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td> 
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+
+    {% if participantes %}
+        <div class="d-flex justify-content-center">
+            <a class="btn btn-primary btn-lg" href="{% url 'reuniones:agregar_participantes' reunion.folio %}">Agregar Participante</a>
+        </div>
+        <br>
+    {% endif %}
+
+        <br> 
+        <h1>Anexar Documentación</h1>
+            <div class="d-flex justify-content-center"> 
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Documento
+                            </th>
+                            <th>
+                                Descargar
+                            </th>
+                            <th>
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for doc in documentos %}
+                        <tr>
+                            {% if doc.reunion.folio == reunion.folio %}
+                            <td>
+                                {{ doc.documento|cut:"static/pdf/" }}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-lg" title="Descargar">
+                                    <a href="{{doc.documento.url}}" download>
+                                        <i class="fas fa-file-download" style="color: #fff;"></i>
+                                    </a>
+                                </button>
+                            </td>
+                            <td>
+                                <form action="/reuniones/borrar/documento/{{reunion.folio}}/{{doc.id}}" method='POST' onsubmit="return confirm('¿Estas seguro que quieres borrar Documento?');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                        <!-- <i class="fas fa-trash-alt"></i> -->Descartar
+                                    </button>
+                                </form>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table> 
+            </div>
+        <br>
+
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-primary btn-lg" href="{% url 'reuniones:agregar_documento' reunion.folio %}">Agregar Documento</a>
+    </div>
+
+
+    <br>
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-success btn-lg" href="{% url 'reuniones:list' %}">Finalizar registro</a>
+    </div>
+
+{% endblock content %}

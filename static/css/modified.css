@@ -1,0 +1,86 @@
+:root {
+    --blanco: #FBFFFE;
+    --oscuro: #1B1B1E;
+    --primario: #FB3754;
+    --secundario: #FAA916;
+    --gris: #6D676E;
+}
+
+
+/* Boton de cerrar sesion */
+
+.btn-group-lg>.btn,
+.btn-lg {
+    padding: .5rem 1rem;
+    font-size: 1.60rem;
+    font-weight: 700;
+    line-height: 1.5;
+    border-radius: .3rem;
+}
+
+
+/* Dropdown menu */
+
+.dropdown-menu {
+    font-size: 2rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: var(--secundario);
+    border-color: var(--secundario);
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active,
+.btn-secondary:not(:disabled):not(.disabled):active,
+.show>.btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #FB3754;
+    border-color: #FB3754;
+}
+
+.btn-secondary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem var(--primario);
+}
+
+
+/* Table */
+
+.table {
+    text-align: center;
+}
+
+.perfil-item {
+    font-size: large;
+}
+
+.list-group-item {
+    font-size: x-large;
+}
+
+
+/*Forms*/
+
+.input-group {
+    width: min-content;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container-form {
+    font-weight: bold;
+    font-size: 15px;
+    width: 350px;
+    height: 200px;
+}
+
+.input-group-prepend {
+    padding: 1rem 50rem;
+}
+
+.center-button {
+    text-align: center;
+}

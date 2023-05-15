@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{% url 'reuniones:borrar' form.id %}" method="POST">
+    {% csrf_token %}
+
+    <a href="{% url 'reuniones:list' %}">Cancelar</a>
+
+    <input type="submit" name="Confirmar">
+</form>
+
+{% endblock content %}

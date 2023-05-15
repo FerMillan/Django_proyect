@@ -1,0 +1,212 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>Bienvenid@</h1>
+
+{% if user.tipo == 1 %}
+<div class="d-flex justify-content-center">
+    <div>
+        <h2 style="
+        color: crimson;
+        background: antiquewhite;
+        padding: 5px;
+        border-radius: 5px;
+        ">
+            Administrador
+        </h2>
+    </div>
+</div><br>
+
+    <div class="d-flex justify-content-center">
+        <a href="/admin" >  
+            <button type="button" class="btn btn-dark btn-lg" data-toggle="tooltip" data-placement="top" title="Cancelar"  style="margin: auto;">
+                <h3><b>Django Admin</b></h3>
+            </button>
+        </a>
+    </div><br>
+
+{% elif user.tipo == 2%}
+<div class="d-flex justify-content-center">
+    <div>
+        <h2 style="
+        color: blue;
+        background: gainsboro;
+        padding: 5px;
+        border-radius: 5px;
+        ">
+            Cuenta Estándar (lvl {{ user.tipo }})
+        </h2>
+    </div>
+</div><br>
+{% elif user.tipo == 3%}
+<div class="d-flex justify-content-center">
+    <div>
+        <h2 style="
+        color: blue;
+        background: gainsboro;
+        padding: 5px;
+        border-radius: 5px;
+        ">
+            Cuenta Estándar (lvl {{ user.tipo }})
+        </h2>
+    </div>
+</div><br>
+{% elif user.tipo == 4%}
+<div class="d-flex justify-content-center">
+    <div>
+        <h2 style="
+        color: blue;
+        background: gainsboro;
+        padding: 5px;
+        border-radius: 5px;
+        ">
+            Cuenta Estándar (lvl {{ user.tipo }})
+        </h2>
+    </div>
+</div><br>
+{% elif user.tipo == 5%}
+<div class="d-flex justify-content-center">
+    <div>
+        <h2 style="
+        color: blue;
+        background: gainsboro;
+        padding: 5px;
+        border-radius: 5px;
+        ">
+            Cuenta Estándar (lvl {{ user.tipo }})
+        </h2>
+    </div>
+</div><br>
+{% endif %}
+
+{% if not semana %}
+
+{% else %}
+    <div class="d-flex justify-content-center">
+        <h2><a class="badge badge-primary" href="#Calendario">Usted tiene eventos pendientes*</a></h2>
+    </div>
+{% endif %}
+
+<br>
+<div class="contenedor sombra padding">
+        <p class="bienvenida">Este es un sistema de correspondencia creado para ayudarte en la organización de tu tiempo y espacio de trabajo, a continuación podrás descubrir las funciones que tiene el sistema</p>
+</div>
+
+<main class="contenedor sombra padding">
+    <h2>¿Qué puedes hacer?</h2><br><br>
+    <div class="servicios">
+        <section class="servicio">
+            <h3>Registros</h3>
+            <a href="/oficios/crear/">
+            <div class="iconos" title="Crea un registro">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-search" width="72" height="72" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                            <path d="M12 21h-5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v4.5" />
+                            <circle cx="16.5" cy="17.5" r="2.5" />
+                            <line x1="18.5" y1="19.5" x2="21" y2="22" />
+                            </svg>
+            </div>
+        </a>
+            <p>Generación y edición de registros para ser turnados a la dependencia correspondiente, te notificaremos cuando alguien te turne algun oficio. </p>
+        </section>
+
+        <section class="servicio">
+            <h3>Reuniones</h3>
+            <a href="/reuniones/">
+            <div class="iconos" title="Ver reuniones">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="72" height="72" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+                        <circle cx="18" cy="18" r="4" />
+                        <path d="M15 3v4" />
+                        <path d="M7 3v4" />
+                        <path d="M3 11h16" />
+                        <path d="M18 16.496v1.504l1 1" />
+                        </svg>
+            </div>
+        </a>
+            <p>Agenda reuniones con las partes involucradas, agrega lugar, hora y asunto a ella, o si es el caso, algún link para videoconferencia. </p>
+        </section>
+
+        <section class="servicio">
+            <h3>Reportes</h3>
+            <a href="/oficios/">
+            <div class="iconos" title="Genera un reporte">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-report" width="72" height="72" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697" />
+                        <path d="M18 14v4h4" />
+                        <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2" />
+                        <rect x="8" y="3" width="6" height="4" rx="2" />
+                        <circle cx="18" cy="18" r="4" />
+                        <path d="M8 11h4" />
+                        <path d="M8 15h3" />
+                        </svg>
+            </div>
+        </a>
+            <p>Al concluir las reuniones, se generan los acuerdos por ambas partes, para cerrar el oficio debes generar un reporte especificando los detalles de todo lo acontencido. </p>
+        </section>
+    </div>
+
+</main>
+
+<main class="contenedor sombra padding">
+    <div id="Calendario">
+        <h1> Calendario <h2>
+            {% if not semana %}
+        
+                {% if num_semana == 0 %}
+                    <h2>Usted no tiene eventos pendientes</h2>
+                {% else %}
+                    <h2>Usted no tiene eventos pendientes</h2>
+                {% endif %}
+
+            {% else %}
+                <h2><b><span class="badge badge-info">Esta semana</span></b></h2>
+                <br> 
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th colspan="2">Horario</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        <tr style="background-color: bisque;">
+                            <th>#</th>
+                            <th>No. de Reunion</th>
+                            <th>Asunto</th>
+                            <th>Fecha de Reunion</th>
+                            <th>Hora de Inicio</th>
+                            <th>Hora de Termino</th>
+                            <th>Lugar de la Reunion</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        
+                        {% for reunion in semana %}
+                            {% if user.tipo <= reunion.usuario.tipo %}
+                                <tr>
+                                    <th>{{forloop.counter}}</th>
+                                    <td>{{reunion.folio}}</td>
+                                    <td>{{reunion.asunto}}</td>
+                                    <td>{{reunion.fecha}}</td>
+                                    <td>{{reunion.inicio}}</td>
+                                    <td>{{reunion.termino}}</td>
+                                    <td>{{reunion.lugar}}</td>
+                                    <td>{{reunion.observaciones}}</td>
+                                    
+                                </tr>
+                            {%endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+    </div>
+</main>
+{% endblock content %}

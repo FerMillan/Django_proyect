@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Calendario</h1>
+
+    {% if not quincena %}
+        
+        {% if num_quincena == 0 %}
+            <h2>Siguientes 2 semanas</h2>
+            <br>
+            <h2><b>No hay reuniones esta semana</b></h2>
+            <br><h2>Más Opciones:</h2>
+            <div class="d-flex justify-content-center mt-5">
+                <a class="btn btn-warning btn-lg" href="/reuniones/calendario/semana">Esta semana</a>
+            </div>
+            <br>
+            <h3>
+                <a class="btn btn-primary btn-lg" href="{% url 'reuniones:agregar' %}">Agregar Reunion</a>
+            </h3>
+        {% else %}
+            <br>
+            <br>
+            <h2>No hay reuniones esta semana</h2>
+            <div class="d-flex justify-content-center mt-5">
+                <a class="btn btn-warning btn-lg" href="/reuniones/calendario/semana">Esta semana</a>
+            </div>
+            <br>
+            <br>
+            <h3>
+        {% endif %}
+    {% else %}
+        <div class="d-flex justify-content-center mt-5">
+            <a class="btn btn-warning btn-lg" href="/reuniones/calendario/semana">Esta semana</a>
+        </div>
+        <br>
+        <h2><b>Siguientes 2 semanas</b></h2>
+        <br> 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th colspan="2">Horario</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr style="background-color: bisque;">
+                    <th>#</th>
+                    <th>No. de Reunion</th>
+                    <th>Asunto</th>
+                    <th>Fecha de Reunion</th>
+                    <th>Hora de Inicio</th>
+                    <th>Hora de Termino</th>
+                    <th>Lugar de la Reunion</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for reunion in quincena %}
+                    
+                        <tr>
+                            <th>{{forloop.counter}}</th>
+                            <td>{{reunion.folio}}</td>
+                            <td>{{reunion.asunto}}</td>
+                            <td>{{reunion.fecha}}</td>
+                            <td>{{reunion.inicio}}</td>
+                            <td>{{reunion.termino}}</td>
+                            <td>{{reunion.lugar}}</td>
+                            <td>{{reunion.observaciones}}</td>
+                            
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <!-- <div class="d-flex justify-content-center mt-5">
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-success btn-lg" type="submit" name="reporte" >
+                    Generar Reporte
+            </button>
+            <button type="button" class="btn btn-primary btn-lg" title="Descargar Reporte Generado" >
+                <a href="/static/pdf/reportes/reuniones/Reporte-Reuniones - {{time}}.pdf" download="Reporte-Reuniones - {{time}}">
+                    <i class="fas fa-file-download"></i>
+                </a>
+            </button>
+        </form>
+    </div> -->
+
+    {% include "pagination.html" with page_obj=reuniones_page num_p=num_pages %}
+
+{% endblock content %}
+
+    <!-- <button href="/reuniones/agregar" action="{% url 'reuniones:agregar' %}" type="submit" class="btn btn-primary btn-lg">Agregar Reunion</button> -->
+
+                <!-- <td> <a href="/reuniones/{{reunion.id}}/borrar"> Borrar </a> </td> -->
+                
+                <!-- <td>
+                    <button type="button" class="btn btn-primary btn-lg" title="Descargar">
+                        <a href="{{oficio.documento.url}}" download>
+                            <i class="fas fa-file-download"></i>
+                        </a>
+                    </button>
+                </td> -->
+                
+
+                <!-- {% if user.id == reunion.usuario.id %} -->
+                <!-- {% endif %} -->
+
+    <!-- <div class="row">
+        <div class="col">
+            <div class="card card-body">
+                <form method="GET">
+    
+                    {% for field in myFilter.form %}
+                        {% if field.label == 'Fecha' %}
+                            <span>{{ field.label_tag }} <input type="date" {{ field }} </span>
+                        {% else %}
+                        <span>{{ field.label_tag }} {{ field }}</span>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    <button class="btn btn-primary btn-lg" type="submit">
+                        Buscar
+                    </button>
+    
+                </form>
+            </div> 
+            <div class="d-flex justify-content-center">
+                <a href="/oficios/" style="padding-right: 5%;">         
+                    <button type="submit" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Limpiar Búsqueda">
+                        Limpiar Búsqueda &nbsp; <i class="fas fa-eraser" style="color: white;"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div> -->

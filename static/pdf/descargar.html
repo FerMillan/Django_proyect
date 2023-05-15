@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    
+	
+ 
+	
+	<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" rel="stylesheet"> 
+    
+    <meta charset="UTF-8">
+    <title>Sistema de Correspondencia | CIGU</title>
+
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
+
+    
+    <script src="https://kit.fontawesome.com/c91297c629.js" crossorigin="anonymous"></script>
+
+    
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/modified.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    
+    <link rel="stylesheet" href="/static/css/form_editar_reuniones.css">
+    
+
+    
+    <link rel="stylesheet" href="/static/css/footer.css">
+    
+    
+
+
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+
+
+    
+
+    
+</head>
+
+<body>
+ <header>
+    <h1 class="titulo">Sistema de Correspondencia    <span>CIGU-UNAM</span></h1>
+ </header>
+    
+
+<div class="nav-bg">
+    <nav class="prime-nav contenedor">
+
+    
+
+        <a class="option" href="/">Inicio</a>
+        <a class="option" href="/reuniones/">Reuniones</a>
+        <a class="option" href="/oficios/buscar/">Buscar</a>
+        <a class="option" href="/oficios/">Oficios</a>
+         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                    Perfil
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="/accounts/perfil/1">Mi perfil </a>
+                    <a class="dropdown-item" href="/accounts/crear/1">Agregar información</a>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                    Herramientas
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="/reuniones/agregar/">Crear reunion</a>
+                    <a class="dropdown-item" href="/oficios/crear/">Crear oficio</a>
+                    <a class="dropdown-item" href="/oficios/crear/">Crear oficio de respuesta</a>
+                    <a class="dropdown-item" href="/oficios/crear/">Generar reportes</a>
+                    <a class="dropdown-item" href="/oficios/dependencia/">Agregar dependencia</a>
+                    <a class="dropdown-item" href="/oficios/crear/">Manual de usuario</a>
+                </div>
+            </div>
+        </div>
+        <a class="option no-hover">
+            <form action="/accounts/logout/" method='POST'>
+                <input type="hidden" name="csrfmiddlewaretoken" value="nSrnfOfDkBgB8Iu0w9qiptShpXE1favIIeMGXIlmqfOPuFoQSZMmSyNtFRsEryyc">
+                <span>fernando</span>
+                <button type="submit" class="btn btn-danger btn-lg">Cerrar sesión</button>
+            </form>
+        </a>
+
+    
+    </nav>
+</div>
+
+    
+<h1>LISTA DE OFICIOS</h1>
+
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form method="GET">
+
+                
+                    
+                    <span><label for="id_folio">Folio:</label> <input type="text" name="folio" id="id_folio"></span>
+                    
+                
+                    
+                        <span><label for="id_fecha">Fecha:</label> <input type="date" <input type="text" name="fecha" id="id_fecha"> </span>
+                    
+                
+                    
+                    <span><label for="id_usuario">Usuario:</label> <select name="usuario" id="id_usuario">
+  <option value="" selected>---------</option>
+
+  <option value="2">FerMP | Oscar Millan Pimentel</option>
+
+  <option value="1">fernando | Oscar Fernando Millan Pimentel</option>
+
+</select></span>
+                    
+                
+                    
+                    <span><label for="id_dependencia">Dependencia:</label> <select name="dependencia" id="id_dependencia">
+  <option value="" selected>---------</option>
+
+  <option value="2">UNAM</option>
+
+  <option value="0">N/A</option>
+
+</select></span>
+                    
+                
+                    
+                    <span><label for="id_turnado">Turnado:</label> <select name="turnado" id="id_turnado">
+  <option value="" selected>---------</option>
+
+  <option value="2">UNAM</option>
+
+  <option value="0">N/A</option>
+
+</select></span>
+                    
+                
+                    
+                    <span><label for="id_asunto">Asunto:</label> <input type="text" name="asunto" id="id_asunto"></span>
+                    
+                
+                    
+                    <span><label for="id_estatus">Estatus:</label> <select name="estatus" id="id_estatus">
+  <option value="" selected>---------</option>
+
+  <option value="NU">Nuevo</option>
+
+  <option value="NR">No Revisado</option>
+
+  <option value="L">Leido</option>
+
+  <option value="S">Seguimiento</option>
+
+  <option value="C">Completado</option>
+
+</select></span>
+                    
+                
+                
+                <button class="btn btn-primary btn-lg" type="submit">
+                    Buscar
+                </button>
+
+            </form>
+        </div>    
+    </div>
+</div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Folio</th>
+                <th>Fecha de creación</th>
+                <th>Usuario</th>
+                <th>Dependencia</th>
+                <th>Turnado a</th>
+                <th>Asunto</th>
+                <th>Estatus</th>
+                <th>Documento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                
+                    <tr>
+                        <th>1</th>
+                        <td>1234</td>
+                        <td>Sept. 2, 2021, 11:53 p.m.</td>
+                        <td>fernando</td>
+                        <td>UNAM</td>
+                        <td>UNAM</td>
+                        <td>Prueba reportes oficios</td>
+                        <td>
+                        <span class="badge badge-info">NUEVO</span>
+                        
+                        
+                        
+                        
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-lg" title="Descargar">
+                                <a href="/static/pdf/MapaTurista_YaUkNNO_TWQYjGX.jpg" download>
+                                    <i class="fas fa-file-download"></i>
+                                </a>
+                            </button>
+                        </td>
+                        <td>
+                            <form action="/oficios/editar_oficio/1234" method='POST'>
+                                <input type="hidden" name="csrfmiddlewaretoken" value="nSrnfOfDkBgB8Iu0w9qiptShpXE1favIIeMGXIlmqfOPuFoQSZMmSyNtFRsEryyc">
+                                <button type="submit" class="btn btn-warning btn-lg" data-toggle="tooltip" data-placement="top" title="Editar">
+                                    <i class="far fa-edit"></i>
+                                </button>
+                            </form>
+                            <form action="/oficios/borrar_oficio/1234" method='POST' onsubmit="return confirm('¿Estas seguro que quieres borrar este oficio?');">
+                                <input type="hidden" name="csrfmiddlewaretoken" value="nSrnfOfDkBgB8Iu0w9qiptShpXE1favIIeMGXIlmqfOPuFoQSZMmSyNtFRsEryyc">
+                                <button type="submit" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>    
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr>
+                        <th>2</th>
+                        <td>12344</td>
+                        <td>Sept. 3, 2021, 12:44 a.m.</td>
+                        <td>fernando</td>
+                        <td>UNAM</td>
+                        <td>UNAM</td>
+                        <td>Prueba reportes oficios</td>
+                        <td>
+                        <span class="badge badge-info">NUEVO</span>
+                        
+                        
+                        
+                        
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-lg" title="Descargar">
+                                <a href="/static/pdf/MapaTurista_YaUkNNO_Mpx7XnK.jpg" download>
+                                    <i class="fas fa-file-download"></i>
+                                </a>
+                            </button>
+                        </td>
+                        <td>
+                            <form action="/oficios/editar_oficio/12344" method='POST'>
+                                <input type="hidden" name="csrfmiddlewaretoken" value="nSrnfOfDkBgB8Iu0w9qiptShpXE1favIIeMGXIlmqfOPuFoQSZMmSyNtFRsEryyc">
+                                <button type="submit" class="btn btn-warning btn-lg" data-toggle="tooltip" data-placement="top" title="Editar">
+                                    <i class="far fa-edit"></i>
+                                </button>
+                            </form>
+                            <form action="/oficios/borrar_oficio/12344" method='POST' onsubmit="return confirm('¿Estas seguro que quieres borrar este oficio?');">
+                                <input type="hidden" name="csrfmiddlewaretoken" value="nSrnfOfDkBgB8Iu0w9qiptShpXE1favIIeMGXIlmqfOPuFoQSZMmSyNtFRsEryyc">
+                                <button type="submit" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>    
+                        </td>
+                    </tr>
+                
+            
+        </tbody>
+    </table>
+
+    <form method="post">
+        <input type="hidden" name="csrfmiddlewaretoken" value="nSrnfOfDkBgB8Iu0w9qiptShpXE1favIIeMGXIlmqfOPuFoQSZMmSyNtFRsEryyc">
+        <button class="btn btn-success btn-lg" type="submit" name="run_script">
+            <a href="" download>
+                Generar Reporte
+            </a>
+        </button>
+    </form>
+
+
+</body>
+
+<!-- Site footer -->
+<div class="down">
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">Sistema creado como proyecto de servicio social por parte de la Facultad de Ciencias de la UNAM para la Coordinación de Igualdad de Género</p>
+          </div>
+
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by 
+         <a href="#">Daniel Lugo</a> and <a href="#">Oscar Fernando</a>.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+</div>   
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+</html>

@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+{% block bootsrap %}
+    {# Cargamos la librería #}
+	{% load bootstrap4 %}
+ 
+	{# CSS Bootstrap #}
+	{% bootstrap_css %} 
+    {% endblock bootsrap %}
+    <meta charset="UTF-8">
+    <title>CIGU</title>
+
+    <div class="parent">
+      <div class="children left-children">
+        <div class="child"><img class="unam-logo" src="{% static 'img/logounam.png' %}" alt="logo-unam"> </div>
+      </div>
+      <div class="children center-children">
+        <div class="child"><p class=titulo-principal>Sistema de Correspondencia</p></div>
+      </div>
+      <div class="children right-children">
+        <div class="child"><img class="cigu-logo" src="{% static 'img/cigu.jpg' %}" alt="logo-unam"> </div>
+      </div>
+    </div>
+
+    {% comment %} Google Font {% endcomment %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
+
+    {% comment %} Fontawsome {% endcomment %}
+    <script src="https://kit.fontawesome.com/c91297c629.js" crossorigin="anonymous"></script>
+
+    {% comment %} Styles CSS {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modified.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% block form_editar_reuniones %}
+    <link rel="stylesheet" href="{% static 'css/form_editar_reuniones.css' %}">
+    {% endblock form_editar_reuniones %}
+
+    {% block footer_css %}
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    {% endblock footer_css %}
+    
+
+
+    {% comment %} Favicon {% endcomment %}
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static '/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favicon-16x16.png' %}">
+
+
+    
+
+    
+</head>
+
+<body>
+ {% comment %} <header>
+    <h1 class="titulo">Sistema de Correspondencia    <span>CIGU-UNAM</span></h1>
+ </header> {% endcomment %}
+    {% include 'navbar.html' %}
+
+    {% block content %}
+
+    {% endblock content %}
+</body>
+
+<!-- Site footer -->
+<div class="down">
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">Sistema creado como proyecto de servicio social por parte de la Facultad de Ciencias de la UNAM para la Coordinación de Igualdad de Género</p>
+          </div>
+
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by 
+         <a href="#">Daniel Lugo</a> and <a href="#">Oscar Fernando</a>.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+</div>   
+
+{% comment %} Scripts {% endcomment %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+{% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> {% endcomment %}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+</html>

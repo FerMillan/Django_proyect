@@ -1,0 +1,152 @@
+{% extends 'base.html' %} 
+
+{% load i18n %}
+
+{% block content %}
+<h1>REGISTROS</h1>
+
+<div class="d-flex justify-content-center">
+    <form action="" method="get">
+        {% for field in myFilter.form %}
+            {% if field.label == 'Fecha' %} 
+                <span> {{ field.label }}: <input type="date" {{ field }} </span>
+            {% else %}
+                <span>{{ field.label }}: {{ field }} </span>
+            {% endif %}
+        {% endfor %}
+        <br>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg" data-toggle="tooltip" data-placement="top" title="Buscar">
+                    Buscar &nbsp; <i class="fas fa-search" style="color: white;"></i>
+                </button> </p>
+            </div>
+    </form>
+</div>
+<br>
+<div class="d-flex justify-content-center">
+    <a href="/oficios/" >         
+        <button type="submit" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Limpiar Búsqueda">
+            Limpiar Búsqueda &nbsp; <i class="fas fa-eraser" style="color: white;"></i>
+        </button>
+    </a>
+</div>
+<br>
+
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Número de registro</th>
+                <th>Fecha de creación</th>
+                <th>Usuario</th>
+                <th>Dependencia</th>
+                <th>Turnado a</th>
+                <th>Asunto</th>
+                <th>Estatus</th>
+                <th>Documento</th>
+                <th>Respuesta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for oficio in data %}
+                {% if user.tipo <= oficio.usuario.tipo %}
+                    <tr>
+                        <th>{{forloop.counter}}</th>
+                        <td>{{oficio.folio}}</td>
+                        {% language 'es' %}
+                        <td>{{oficio.fecha|date:"Y-m-d"}}</td>
+                        {% endlanguage %}
+                        <td>{{oficio.usuario.usuario}}</td>
+                        <td>{{oficio.dependencia.siglas}}</td>
+                        <td>{{oficio.turnado}}</td>
+                        <td>{{oficio.asunto}}</td>
+                        <td>
+                        {% if oficio.estatus == 'NU' %}<span class="badge badge-info">NUEVO</span>{% endif %}
+                        {% if oficio.estatus == 'NR' %}<span class="badge badge-danger">NO REVISADO</span>{% endif %}
+                        {% if oficio.estatus == 'L' %}<span class="badge badge-warning">LEIDO</span>{% endif %}
+                        {% if oficio.estatus == 'S' %}<span class="badge badge-pill badge-primary">SEGUIMIENTO</span>{% endif %}
+                        {% if oficio.estatus == 'C' %}<span class="badge badge-success">COMPLETADO</span>{% endif %}
+                        </td>
+                        <td>
+                            <form method="POST" action="{% url 'oficios:status' oficio.folio %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary btn-lg" title="Descargar">
+                                    <a href="{{oficio.documento.url}}" download>
+                                        <i class="fas fa-file-download"></i>
+                                    </a>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                                {% if oficio.folio_oficio.exists %}
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                {% else %}
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <form action="{% url 'oficios:responder' oficio.folio %}" method='POST'>
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Responder">
+                                        <i class="fa fa-reply" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                                <form action="{% url 'oficios:editar' oficio.folio %}" method='POST'>
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-warning btn-lg" data-toggle="tooltip" data-placement="top" title="Editar">
+                                        <i class="far fa-edit"></i>
+                                    </button>
+                                </form>
+                                <form action="{% url 'oficios:borrar' oficio.folio  %}" method='POST' onsubmit="return confirm('¿Estas seguro que quieres borrar este oficio?');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>    
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-success btn-lg" type="submit" name="reporte" >
+                    Generar Reporte
+            </button>
+        </form>
+    </div>
+
+
+    {% if reporte_v == 1 %}
+    <div id="background-alert"> 
+        <div class="alerta">
+            <div class="alert alert-success">
+                Reporte Generado correctamente
+            </div>
+            <div class="d-flex justify-content-center">
+                <a href="#" id="close-button" style="padding: 2px;">
+                    <button type="button" class="btn btn-danger btn-lg" onclick="this.parentElement.parentElement.parentElement.parentElement.style.display='none';">Cancelar</button>
+                </a>
+
+                <a href="/static/pdf/reportes/oficios/Reporte-Oficios - {{time}}.pdf" style="padding: 2px;" download="Reporte-Oficios - {{time}}">
+                    <button type="button" class="btn btn-primary btn-lg" title="Descargar Reporte Generado" onclick="this.parentElement.parentElement.parentElement.parentElement.style.display='none';">Descargar</button>
+                </a>
+            </div>
+        </div>
+    </div>  
+    {% endif %}
+
+    {% include "pagination.html" with page_obj=oficios_page num_p=num_pages %}
+
+{% endblock content %}
+
+<!-- {% if user.id == oficio.usuario.id %} -->
+
+                <!-- {% endif %} -->

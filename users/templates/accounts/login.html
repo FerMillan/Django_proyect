@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>INICIO DE SESIÓN</h1>
+
+    <form class="formulario" action="{% url 'usuario:login' %}" method="post">
+        {% csrf_token %}
+        Usuario: {{ form.username }}
+        Contraseña: <input type="password" {{ form.password }}
+        <b></b>
+        {% if request.GET.next  %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+        {% endif %}
+        <input type="submit" value="Login">
+    </form>
+
+    {{ request.GET.next }}
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>RESPONDER A UN REGISTRO</h1>
+{% comment %} 
+     <form class="" action="" method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button class="btn btn-primary btn-lg" type="submit">Responder</button>
+    </form> {% endcomment %}
+
+    <div></div>
+        <div class="d-flex justify-content-center">
+            <div class="form form-group">
+                <form class="" action="" method='POST' enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                        {% for field in form %}
+                
+                         <p>{{ field.label_tag }} {{ field }}</p>
+                                                        
+                        {% endfor %}
+
+                    <input class="d-flex justify-content-center btn btn-primary btn-lg" style="margin: auto;" type="submit" value="Responder">
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <a href="{% url 'oficios:list' %}" >  
+                            <button type="button" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Cancelar"  style="margin: auto;">
+                                Cancelar
+                            </button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

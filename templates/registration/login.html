@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+            <h2>Inicio de sesión</h2>
+
+            <form class="formulario" method="post">
+                <fieldset>
+                    <legend>Iniciar sesión</legend>
+
+                    <div class="contenedor-campos">
+                        {% comment %} <div class="campo">
+                            <label>Nombre</label>
+                            <input class="input-text" type="text" placeholder="Tu nombre">
+                        </div> {% endcomment %}
+
+                        <div class="campo">
+                            <label>Correo</label>
+                            <input class="input-text" type="email" placeholder="">
+                        </div>
+
+                        <div class="campo">
+                            <label>Contraseña</label>
+                            <input class="input-text" type="password" placeholder="">
+                        </div>
+                    </div>
+
+                    <legend class="registro">¿No tienes cuenta? <a href="#"> Registrate </a> </legend>
+
+
+                    <div class="alinear-centro flex enviar">
+                        <input class="boton w-sm-100" type="submit" value="Enviar">
+                    </div>
+
+
+
+                </fieldset>
+            </form>
+
+        </section>
+{% endblock content %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Editar Reunion</h1>
+
+    <div>
+       
+
+        <div id="background-alert"> 
+            <div class="alerta">
+                <div class="alert alert-warning">
+                    Revisa que los datos sean correctos
+                    <ul id="errors_list" style="list-style: none;"
+                            {{ form.errors | cut:"asunto" }} </ul>
+                            
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="#" id="close-button">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="this.parentElement.parentElement.parentElement.parentElement.style.display='none';">Aceptar</button>
+                    </a>
+                </div>
+            </div>
+        </div>    
+
+ <!-- {% if form.errors %} -->
+    <!-- {% endif %} -->
+
+        <div class="d-flex justify-content-center">
+            <div class="form form-group">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div>
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-warning">                        
+                            <table role="alert" onclick="this.parentElement.style.display='none';">
+                                <tr>
+                                    <td>
+                                        <span class="closebtn">
+                                            <i class="fas fa-times" style="color: #856404;"></i>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <ul style="list-style: none; margin-bottom: auto;"
+                                            {{ form.errors }} </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        Hola
+                    {% endif %}
+                
+                    {% for field in form %}
+                        {% if field.label == 'Fecha de Reunión' %}
+                            <p>{{ field.label_tag }} <input type="date" {{ field }} </p>
+                        {% elif field.label == 'Hora de inicio de la Reunión' %}
+                            <p>{{ field.label_tag }} <input type="time" {{ field }} </p>
+                        {% elif field.label == 'Hora de termino de la Reunión' %}
+                            <p>{{ field.label_tag }} <input type="time" {{ field }} </p> 
+                        {% else %}
+                            <p>{{ field.label_tag }} {{ field }}</p>
+                            
+                        {% endif %}
+                        
+                    {% endfor %}
+
+                    <!-- <p> {{ form.fecha.label }}: <input type="date" {{form.fecha}} </p>
+                    <p> {{ form.inicio.label }}: <input type="time" {{form.inicio}} </p>
+                    <p> {{ form.termino.label }}: <input type="time" {{form.termino}} </p>
+                    <p> {{ form.lugar.label }}: <textarea style="height: 35px;" {{form.lugar}} </p>
+                    <p> {{ form.asunto.label }}: {{form.asunto}} </p>
+                    <p> {{ form.observaciones.label }}: <textarea style="height: 35px;" {{form.observaciones}} </p> -->
+
+                    <input class="d-flex justify-content-center btn btn-primary btn-lg" style="margin: auto;" type="submit" value="Guargar">
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <a href="{% url 'reuniones:list'   %}" >  
+                            <button type="button" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Cancelar"  style="margin: auto;">
+                                Cancelar
+                            </button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

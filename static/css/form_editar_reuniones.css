@@ -1,0 +1,32 @@
+
+#background-alert {
+    background: rgba(33, 41, 52, .85);
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    position: fixed;
+    z-index: 999;
+}
+
+#background-alert .alerta {
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(33, 41, 52, .75);
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 2rem;
+}
+
+ul.errorlist {
+    padding: initial;
+    list-style: inherit;
+    margin: auto;
+}
+
+.vista-doc {
+    text-align: center;
+}

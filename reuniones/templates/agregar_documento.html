@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Agregar Documento</h1>
+
+    <div class="d-flex justify-content-center">
+        <div class="form form-group">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ formDoc.as_p }}
+                
+                <br>
+                <input class="d-flex justify-content-center btn btn-primary btn-lg" style="margin: auto;" type="submit" value="Agregar Documento">
+                <br>
+                <div class="d-flex justify-content-center">
+                    <a href="{% url 'reuniones:participantes' reunion.folio  %}" >  
+                        <button type="button" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Cancelar"  style="margin: auto;">
+                            Cancelar
+                        </button>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

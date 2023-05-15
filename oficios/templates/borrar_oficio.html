@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>Are you sure you want to delete {{ item }}?</p>
+
+<form action="{% url 'oficios:borrar' item.id %}" method="POST">
+    {% csrf_token %}
+
+    <a href="{% url 'oficios:list' %}">Cancelar</a>
+
+    <input type="submit" name="Confirmar">
+</form>
+
+{% endblock content %}

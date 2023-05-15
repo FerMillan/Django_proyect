@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>EDITAR PERFIL</h1>
+    <br>
+    <div class="d-flex justify-content-center">
+        <form class="" action="" method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form_up.as_p }}
+            <div class="d-flex justify-content-center">
+                <div class="alert alert-danger" role="alert">Opcional (*)</div> <br>
+            </div>
+            <div>
+                <button class="d-flex justify-content-center btn btn-primary btn-lg" type="submit" style="margin: auto;">
+                    Confirmar
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

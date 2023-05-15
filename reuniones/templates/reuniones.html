@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Lista de reuniones</h1>
+
+   
+    <div class="d-flex justify-content-center">
+        <form action="" method="get">
+            {% for field in buscar.form %}
+                {% if field.label == 'Fecha' %} 
+                    <span> {{ field.label }}: <input type="date" {{ field }} </span>
+                {% elif field.label == 'ID' %} 
+                    <span> Número de oficio: {{ field }}
+                {% else %}
+                    <span>{{ field.label }}: {{ field }} </span>
+                {% endif %}
+            {% endfor %}
+            <br>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg" data-toggle="tooltip" data-placement="top" title="Buscar">
+                    Buscar &nbsp; <i class="fas fa-search" style="color: white;"></i>
+                </button> </p>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+        <a href="/reuniones/">         
+            <button type="submit" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Limpiar Búsqueda">
+                Limpiar Búsqueda &nbsp; <i class="fas fa-eraser" style="color: white;"></i>
+            </button>
+        </a>
+    </div>
+    
+    <br>
+    
+    {% if not reuniones %}
+        
+        {% if zero == 0 %}
+            <br>
+            <br>
+            <h2>No hay reuniones existentes</h2>
+            <br>
+            <br>
+            <h3>
+                <a class="btn btn-primary btn-lg" href="{% url 'reuniones:agregar' %}">Agregar Reunion</a>
+            </h3>
+        {% else %}
+            <br>
+            <br>
+            <h2>No hay reuniones relacionadas con la busqueda</h2>
+            <br>
+            <br>
+            <h3>
+        {% endif %}
+    {% else %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th colspan="2">Horario</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>#</th>
+                    <th>No. de Reunion</th>
+                    <!-- <th>Número de oficio</th> -->
+                    <th>Asunto</th>
+                    <th>Fecha de Reunion</th>
+                    <!-- <th>Mes</th>
+                    <th>Año</th> -->
+                    <th>Hora de Inicio</th>
+                    <th>Hora de Termino</th>
+                    <th>Lugar de la Reunion</th>
+                    <th>Observaciones</th>
+                    <!-- <th>Tipo usuario subido</th> -->
+                    <th>Acciones</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for reunion in reuniones_page %}
+                    {% if user.tipo <= reunion.usuario.tipo %}
+                        <tr>
+                            <th>{{forloop.counter}}</th>
+                            <td>{{reunion.folio}}</td>
+                            <td>{{reunion.asunto}}</td>
+                            <td>{{reunion.fecha}}</td>
+                            <!-- <td>{{reunion.mes}}</td>
+                            <td>{{reunion.año}}</td> -->
+                            <td>{{reunion.inicio}}</td>
+                            <td>{{reunion.termino}}</td>
+                            <td>{{reunion.lugar}}</td>
+                            <td>{{reunion.observaciones}}</td>
+                            <!-- <td>{{reunion.usuario.tipo}}</td> -->
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a href="{% url 'reuniones:participantes' reunion.folio  %}" style="padding-right: 5%;">
+                                        
+                                        <button type="submit" class="btn btn-primary btn-lg" data-toggle="tooltip" data-placement="top" title="Ver Participantes">
+                                            <i class="fas fa-users" style="color: white;"></i>
+                                        </button>
+                                    </a>
+                                    <br>
+                                    <form action="{% url 'reuniones:editar' reunion.folio  %}" method='POST' style="padding-right: 5%;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-warning btn-lg" data-toggle="tooltip" data-placement="top" title="Editar">
+                                            <i class="far fa-edit"></i>
+                                        </button>
+                                    </form>
+                                    <form action="{% url 'reuniones:borrar' reunion.folio  %}" method='POST' onsubmit="return confirm('¿Estas seguro que quieres borrar esta Reunion?');">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>    
+                                </div>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <div class="d-flex justify-content-center mt-5">
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-success btn-lg" type="submit" name="reporte" onclick="this.parentElement.parentElement.parentElement.parentElement.style.display='block';">
+                    Generar Reporte
+            </button>
+        </form>
+    </div>
+    
+    {% if reporte_v == 1 %}
+    <div id="background-alert"> 
+        <div class="alerta">
+            <div class="alert alert-success">
+                Reporte Generado correctamente
+            </div>
+            <div class="d-flex justify-content-center">
+                <a href="#" id="close-button" style="padding: 2px;">
+                    <button type="button" class="btn btn-danger btn-lg" onclick="this.parentElement.parentElement.parentElement.parentElement.style.display='none';">Cancelar</button>
+                </a>
+
+                <a href="/static/pdf/reportes/reuniones/Reporte-Reuniones - {{time}}.pdf" style="padding: 2px;" download="Reporte-Reuniones - {{time}}">
+                    <button type="button" class="btn btn-primary btn-lg" title="Descargar Reporte Generado" onclick="this.parentElement.parentElement.parentElement.parentElement.style.display='none';">Descargar</button>
+                </a>
+            </div>
+        </div>
+    </div>  
+    {% endif %}
+
+    {% include "pagination.html" with page_obj=reuniones_page num_p=num_pages %}
+
+{% endblock content %}
+
+
+<!-- <ul id="errors_list" style="list-style: none;"
+{{ formReunion.errors | cut:"asunto" }} </ul> -->
+
+    <!-- <button href="/reuniones/agregar" action="{% url 'reuniones:agregar' %}" type="submit" class="btn btn-primary btn-lg">Agregar Reunion</button> -->
+
+                <!-- <td> <a href="/reuniones/{{reunion.id}}/borrar"> Borrar </a> </td> -->
+                
+                <!-- <td>
+                    <button type="button" class="btn btn-primary btn-lg" title="Descargar">
+                        <a href="{{oficio.documento.url}}" download>
+                            <i class="fas fa-file-download"></i>
+                        </a>
+                    </button>
+                </td> -->
+                
+
+                <!-- {% if user.id == reunion.usuario.id %} -->
+                <!-- {% endif %} -->
+
+    <!-- <div class="row">
+        <div class="col">
+            <div class="card card-body">
+                <form method="GET">
+    
+                    {% for field in myFilter.form %}
+                        {% if field.label == 'Fecha' %}
+                            <span>{{ field.label_tag }} <input type="date" {{ field }} </span>
+                        {% else %}
+                        <span>{{ field.label_tag }} {{ field }}</span>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    <button class="btn btn-primary btn-lg" type="submit">
+                        Buscar
+                    </button>
+    
+                </form>
+            </div> 
+            <div class="d-flex justify-content-center">
+                <a href="/oficios/" style="padding-right: 5%;">         
+                    <button type="submit" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Limpiar Búsqueda">
+                        Limpiar Búsqueda &nbsp; <i class="fas fa-eraser" style="color: white;"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div> -->

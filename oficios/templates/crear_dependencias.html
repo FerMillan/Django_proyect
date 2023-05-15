@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>AGREGA UNA DEPENDENCIA</h1>
+
+<br>
+<p style="text-align: center;"> Escribe a continuación el nombre de la dependencia y las siglas de la misma:
+<br>
+<div></div>
+        <div class="d-flex justify-content-center">
+            <div class="form form-group">
+                <form class="" action="{% url 'oficios:dependencia' %}" method='POST' enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button class="btn btn-primary btn-lg" type="submit">Crear</button>
+                </form>
+            </div>    
+        </div>   
+
+{% endblock content %}
